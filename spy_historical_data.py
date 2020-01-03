@@ -1,11 +1,12 @@
 import requests
 import json
+import pandas as pd
+from pandas.io.json import json_normalize
 
 res = requests.get(
-    'https://api.worldtradingdata.com/api/v1/history?symbol=SPY&sort=newest&api_token=1PuMQqtLgDksslLmJMFOmxhpkybV4otV3zjyCkFyw7Oy6z1MhbFZwE0G1dKY&date_from=2018-01-02&date_to=2018-01-03',)
+    'https://api.worldtradingdata.com/api/v1/history?symbol=SPY&sort=newest&api_token=1PuMQqtLgDksslLmJMFOmxhpkybV4otV3zjyCkFyw7Oy6z1MhbFZwE0G1dKY',)
 
 data = res.json()
-print(data)
 
 dates = data['history'].items()
 day_deltas_raw = {}
@@ -33,9 +34,23 @@ for k, v in dates:
     day_ranges_pct[k] = day_range_pct
     day_volumes[k] = day_volume
 
+df_day_deltas_raw = pd.DataFrame(
+    day_deltas_raw.items(), columns=['date', 'delta_raw'])
 
-print(day_deltas_raw)
-print(day_deltas_pct)
-print(day_ranges_raw)
-print(day_ranges_pct)
-print(day_volumes)
+df_day_deltas_pct = pd.DataFrame(
+    day_deltas_pct.items(), columns=['date', 'delta_pct'])
+
+df_day_ranges_raw = pd.DataFrame(
+    day_ranges_raw.items(), columns=['date', 'range_raw'])
+
+df_day_ranges_pct = pd.DataFrame(
+    day_ranges_raw.items(), columns=['date', 'range_raw'])
+
+df_day_volumes = pd.DataFrame(
+    day_volumes.items(), columns=['date', 'volume'])
+
+print(df_day_deltas_raw.head(3))
+print(df_day_deltas_pct.head(3))
+print(df_day_ranges_raw.head(3))
+print(df_day_ranges_pct.head(3))
+print(df_day_volumes.head(3))
