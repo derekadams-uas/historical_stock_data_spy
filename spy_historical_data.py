@@ -2,6 +2,7 @@ import requests
 import json
 import pandas as pd
 from pandas.io.json import json_normalize
+import seaborn as sns
 
 res = requests.get(
     'https://api.worldtradingdata.com/api/v1/history?symbol=SPY&sort=newest&api_token=1PuMQqtLgDksslLmJMFOmxhpkybV4otV3zjyCkFyw7Oy6z1MhbFZwE0G1dKY',)
