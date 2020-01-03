@@ -48,9 +48,3 @@ df_day_ranges_pct = pd.DataFrame(
 
 df_day_volumes = pd.DataFrame(
     day_volumes.items(), columns=['date', 'volume'])
-
-print(df_day_deltas_raw.head(3))
-print(df_day_deltas_pct.head(3))
-print(df_day_ranges_raw.head(3))
-print(df_day_ranges_pct.head(3))
-print(df_day_volumes.head(3))
